@@ -14,7 +14,7 @@ const FriendListWidget = ({ userId }) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:5000/users/${userId}/friends`,
+      `https://pavilion-media-node-server.onrender.com/users/${userId}/friends`,
       {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
@@ -42,9 +42,9 @@ const FriendListWidget = ({ userId }) => {
       <Box display='flex' flexDirection='column' gap='1.5rem'>
         {friends &&
           friends.length > 0 &&
-          friends.map((friend) => (
+          friends.map((friend, i) => (
             <Friend
-              key={friend._id}
+              key={`${friend._id}-${i}`}
               friendId={friend._id}
               name={`${friend.firstName} ${friend.lastName}`}
               subtitle={friend.occupation}
